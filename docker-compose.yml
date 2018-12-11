@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  vue:
+    container_name: vue
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - ./nginx-conf:/etc/nginx/conf.d
+    tty: true
+    ports:
+      - 80:80
+    restart: always
