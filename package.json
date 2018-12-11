@@ -1,0 +1,21 @@
+{
+  "name": "economic-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd frontend && npm install",
+    "build": "cd frontend && yarn build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pb10001/economic-game.git"
+  },
+  "author": "pb10001",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pb10001/economic-game/issues"
+  },
+  "homepage": "https://github.com/pb10001/economic-game#readme"
+}
