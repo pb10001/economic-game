@@ -1,25 +1,27 @@
 <template>
     <div>
-        <div id="status">
-            <Status />
-        </div>
-        <div id="field">
-            <Field />
+        <div class="columns">
+            <div id="status" class="column is-3">
+                <Status />
+            </div>
+            <div id="field" class="column is-9">
+                <Fields />
+            </div>
         </div>
         <div id="controls">
             <Control />
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Field from '@/components/Field';
+import Fields from '@/components/Fields';
 import Control from '@/components/Control';
 import Status from '@/components/Status';
 
 @Component({
     components: {
-        Field,
+        Fields,
         Control,
         Status
     }

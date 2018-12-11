@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import Agriculture from './views/Agriculture.vue';
 
 Vue.use(Router);
 
@@ -22,7 +21,7 @@ export default new Router({
     {
       path: '/agriculture',
       name: 'agriculture',
-      component: Agriculture,
+      component: () => import('./views/Agriculture.vue'),
     },
   ],
 });
