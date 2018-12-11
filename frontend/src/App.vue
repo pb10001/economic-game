@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <router-link to="/agriculture">農業</router-link>
     </div>
     <router-view/>
   </div>
