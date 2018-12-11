@@ -5,7 +5,9 @@ import FieldModel from './field';
 import AnnualReportModel from './annual-report';
 
 Vue.use(Vuex);
-
+interface State {
+  fields: FieldModel[]
+}
 const agriCulture = {
   // モジュールごとにmutationsなどを分割できる(同じ名前でも)
   namespaced: true,
@@ -50,7 +52,8 @@ const agriCulture = {
     },
     nextMonth(state: any) {
       if(state.gameOver) return;
-      state.fields.forEach(f => {
+      let fields: FieldModel[]  = state.fields;
+      fields.forEach(f => {
         if(!f.vegetable.isEmpty()) {
           state.report.cultivationCost += 100; // 栽培費用
           agriCulture.mutations.consume(state, 100);

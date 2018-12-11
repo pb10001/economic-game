@@ -15,9 +15,9 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Fields from '@/components/Fields';
-import Control from '@/components/Control';
-import Status from '@/components/Status';
+import Fields from '@/components/Fields.vue';
+import Control from '@/components/Control.vue';
+import Status from '@/components/Status.vue';
 
 @Component({
     components: {

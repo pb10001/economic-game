@@ -30,6 +30,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import FieldModel from '../field';
 import Vegetable from '../vegetable';
+
+interface IBlocks {
+    blocks: FieldModel[]
+}
 @Component({
     mounted() {
         this.blocks = this.$store.state.agriCulture.fields
@@ -40,9 +44,9 @@ import Vegetable from '../vegetable';
         }
     }
 })
-export default class Fields extends Vue {
-    blocks: Vegetable[] = [];
-    activated = false;
+export default class Fields extends Vue implements IBlocks {
+    blocks: FieldModel[] = []
+    activated: boolean = false;
 }
 </script>
 <style lang="scss" scoped>
