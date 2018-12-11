@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="section">
-            <p>プレイヤー</p>
-            <p>{{currentYear}}年目，{{currentMonth}}月</p>
-            <p>所持金:{{currentMoney}}P</p>
+            <div class="notification is-info">
+                <p>{{currentYear}}年目，{{currentMonth}}月</p>
+                <p>所持金:{{currentMoney}}P</p>
+            </div>
             <div class="box">
                 <p class="multiline">{{log}}</p>
             </div>

@@ -17,9 +17,9 @@ const agriCulture = {
     month : 4,
     gameOver: false,
     vegetables: {
-      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.2, 200, 300, '/img/cabbage.png'),
-      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 120, '/img/carrot.png'),
-      onion: new Vegetable('タマネギ', [11, 12], 6, 0.1, 300, 450, ''),
+      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.2, 200, 3000, '/img/cabbage.png'),
+      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 1200, '/img/carrot.png'),
+      onion: new Vegetable('タマネギ', [11, 12], 6, 0.1, 300, 4500, '/img/onion.png'),
     },
     fields: [
       new FieldModel(1),
@@ -42,7 +42,7 @@ const agriCulture = {
       if(state.gameOver) return;
       state.fields.forEach(f => {
         if(!f.vegetable.isEmpty()) {
-          agriCulture.mutations.consume(state, 50);
+          agriCulture.mutations.consume(state, 100);
         }
         f.vegetable.getAge();
       });
@@ -76,6 +76,12 @@ const agriCulture = {
         state.money += field.vegetable.value;
       }
       field.vegetable = Vegetable.empty();
+    },
+    addField(state: any) {
+      if(state.gameOver) return;
+      let id = state.fields.length + 1;
+      state.fields.push(new FieldModel(id));
+      agriCulture.mutations.consume(state, 50000);
     },
   },
   getters: {

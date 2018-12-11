@@ -1,23 +1,29 @@
 <template>
     <div>
         <div class="buttons has-addons">
-            <span class="button is-primary is-outlined">農地拡大</span>
+            <span @click="addField" class="button is-primary is-outlined">農地拡大</span>
             <span class="button is-success is-outlined">セーブ</span>
             <span @click="next" class="button is-primary is-outlined">次の月へ</span>
         </div>
         <div class="columns is-multiline is-variable is-1">
-            <div class="column is-4" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
+            <div class="column is-3" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
                 <div class="card">
-                    <div class="media">
-                        <img :src="item.url" width="100">
-                        <p class="is-size-4">{{item.name}}</p>
-                    </div>
                     <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <img :src="item.url" width="64">
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{item.name}}</p>
+                            </div>
+                        </div>
                         <p>種の価格: {{item.initPrice}}P</p>
                         <p>栽培期間: {{item.span}}ヶ月</p>
                         <p>販売価格: {{item.value}}P</p>
-                        <p>リスク: {{item.risk}}</p>
-                        <button @click="seed(item)" class="button is-primary">植える</button>
+                        <p>リスク: {{item.risk * 100}}%</p>
+                    </div>
+                    <div class="card-footer">
+                        <a @click="seed(item)" class="card-footer-item">植える</a>
                     </div>
                 </div>
             </div>
@@ -44,8 +50,14 @@ import Vegetable from '../vegetable';
         },
         seed(item: Vegetable) {
             this.$store.commit("agriCulture/seed", item.copy());
-        }
-    }
+        },
+        addField() {
+            this.$dialog.confirm({
+                message: "50000P消費します。続けますか？",
+                onConfirm: () => this.$store.commit("agriCulture/addField"),
+            })
+        },
+    },
 })
 export default class Control extends Vue{
 }
