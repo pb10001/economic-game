@@ -31,12 +31,11 @@ import { Component, Vue } from 'vue-property-decorator';
 import FieldModel from '../field';
 import Vegetable from '../vegetable';
 
-interface IBlocks {
-    blocks: FieldModel[]
-}
 @Component({
-    mounted() {
-        this.blocks = this.$store.state.agriCulture.fields
+    computed: {
+        blocks() {
+            return this.$store.state.agriCulture.fields
+        }
     },
     methods: {
         harvest(item: FieldModel) {
@@ -44,8 +43,7 @@ interface IBlocks {
         }
     }
 })
-export default class Fields extends Vue implements IBlocks {
-    blocks: FieldModel[] = []
+export default class Fields extends Vue {
     activated: boolean = false;
 }
 </script>
