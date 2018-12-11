@@ -6,7 +6,7 @@
             <span @click="next" class="button is-primary is-outlined">次の月へ</span>
         </div>
         <div class="columns is-multiline is-variable is-1">
-            <div class="column is-3" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
+            <div class="column is-4" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
                 <div class="card">
                     <div class="card-content">
                         <div class="media">

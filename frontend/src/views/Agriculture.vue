@@ -6,10 +6,10 @@
             </div>
             <div id="field" class="column is-9">
                 <Fields />
+                <div id="controls">
+                    <Control />
+                </div>
             </div>
-        </div>
-        <div id="controls">
-            <Control />
         </div>
     </div>
 </template>

@@ -8,6 +8,9 @@
             <div class="box">
                 <p class="multiline">{{log}}</p>
             </div>
+            <div class="box">
+                <p class="multiline">{{reportLog}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -26,7 +29,10 @@ import { Component, Vue } from 'vue-property-decorator';
         },
         log() {
             return this.$store.state.agriCulture.log;
-        }
+        },
+        reportLog() {
+            return this.$store.state.agriCulture.reportLog;
+        },
     }
 })
 export default class Status extends Vue{
@@ -34,7 +40,7 @@ export default class Status extends Vue{
 </script>
 <style lang="scss" scoped>
 .box {
-    height: 200px;
+    max-height: 250px;
     overflow-y: scroll;
     .multiline {
         white-space: pre-wrap;

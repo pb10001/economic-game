@@ -2,7 +2,7 @@
     <section class="section">
         <div>
             <transition-group name="bl" class="columns is-multiline is-variable is-1">
-                <div class="column is-6" v-for="item in blocks" :key="item.id">
+                <div class="column is-4" v-for="item in blocks" :key="item.id">
                     <div class="card has-text-white">
                         <div class="card-content earth">
                             <div class="media">

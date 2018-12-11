@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Vegetable from './vegetable';
 import FieldModel from './field';
+import AnnualReportModel from './annual-report';
 
 Vue.use(Vuex);
 
@@ -12,14 +13,16 @@ const agriCulture = {
     title : 'agriculture',
     description : 'agriculture',
     log: '---1年目4月---\n',
+    reportLog: '',
+    report: new AnnualReportModel(1),
     money: 1000,
     year: 1,
     month : 4,
     gameOver: false,
     vegetables: {
-      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.2, 200, 3000, '/img/cabbage.png'),
+      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.4, 200, 3000, '/img/cabbage.png'),
       carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 1200, '/img/carrot.png'),
-      onion: new Vegetable('タマネギ', [11, 12], 6, 0.1, 300, 4500, '/img/onion.png'),
+      onion: new Vegetable('タマネギ', [11, 12], 6, 0.2, 300, 4500, '/img/onion.png'),
     },
     fields: [
       new FieldModel(1),
@@ -38,10 +41,18 @@ const agriCulture = {
         state.gameOver = true;
       }
     },
+    report(state: any) {
+      let report = state.report;
+      report.cash = state.money;
+      report.land = state.fields.length * 50000;
+      state.reportLog += '【' + state.year + '年目　年次レポート】\n';
+      state.reportLog += report.toString() + '\n';
+    },
     nextMonth(state: any) {
       if(state.gameOver) return;
       state.fields.forEach(f => {
         if(!f.vegetable.isEmpty()) {
+          state.report.cultivationCost += 100; // 栽培費用
           agriCulture.mutations.consume(state, 100);
         }
         f.vegetable.getAge();
@@ -49,8 +60,10 @@ const agriCulture = {
       if (state.month < 12) {
         state.month++;
       } else {
+        agriCulture.mutations.report(state); // 年次報告を作成
         state.year++;
         state.month = 1;
+        state.report = new AnnualReportModel(state.year);
       }
       state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
     },
@@ -60,8 +73,9 @@ const agriCulture = {
         let f = state.fields[i];
         if(f.vegetable.name==='空') {
           f.vegetable = vegetable;
-        agriCulture.mutations.consume(state, f.vegetable.initPrice);
-        state.log += f.vegetable.name + 'を植えた!\n';
+          state.report.purchaseCost += f.vegetable.initPrice; // 費用
+          agriCulture.mutations.consume(state, f.vegetable.initPrice);
+          state.log += f.vegetable.name + 'を植えた!\n';
           return;
         }
       }
@@ -73,6 +87,7 @@ const agriCulture = {
         state.log += field.vegetable.name + 'の収穫に失敗した!\n';
       } else {
         state.log += field.vegetable.name + 'を収穫した!\n';
+        state.report.revenue += field.vegetable.value; // 売り上げ
         state.money += field.vegetable.value;
       }
       field.vegetable = Vegetable.empty();
