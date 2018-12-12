@@ -27,6 +27,10 @@ export default class AnnualReportModel {
         /* 粗利 */
         return this.revenue - this.totalCost();
     }
+    public profitability(): number {
+        /* 粗利率(小数第一位まで) */
+        return Math.round(1000 * this.netIncome() / this.revenue) / 10;
+    }
     public toString(): string {
         /* 文字列化 */
         return [
@@ -36,6 +40,7 @@ export default class AnnualReportModel {
             '売上: ' + this.revenue + 'P',
             '費用: ' + this.totalCost() + 'P',
             '粗利: ' + this.netIncome() + 'P',
+            '粗利率' + this.profitability() + '%',
         ].join('\n');
     }
 }

@@ -5,10 +5,11 @@
                 <Status />
             </div>
             <div id="field" class="column is-9">
-                <Fields />
                 <div id="controls">
                     <Control />
                 </div>
+                <Fields />
+                <Catalogue />
             </div>
         </div>
     </div>
@@ -18,13 +19,15 @@ import { Component, Vue } from 'vue-property-decorator';
 import Fields from '@/components/Fields.vue';
 import Control from '@/components/Control.vue';
 import Status from '@/components/Status.vue';
+import Catalogue from '@/components/Catalogue.vue';
 
 @Component({
     components: {
         Fields,
         Control,
-        Status
-    }
+        Status,
+        Catalogue,
+    },
 })
 export default class Agriculture extends Vue {
 }

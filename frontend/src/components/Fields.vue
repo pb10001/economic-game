@@ -1,25 +1,21 @@
 <template>
     <section class="section">
         <div>
-            <transition-group name="bl" class="columns is-multiline is-variable is-1">
+            <transition-group name="vl" class="columns is-multiline is-variable is-1">
                 <div class="column is-4" v-for="item in blocks" :key="item.id">
-                    <div class="card has-text-white">
-                        <div class="card-content earth">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-64x64">
-                                        <img v-if="item.vegetable.url" :src="item.vegetable.url">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p>{{item.vegetable.name}}</p>
-                                    <p v-if="item.vegetable.name !== '空'">{{item.vegetable.age}}ヶ月目</p>
-                                </div>
+                    <div class="box earth has-text-white">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    <img v-if="item.vegetable.url" :src="item.vegetable.url">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p>{{item.vegetable.name}}</p>
+                                <progress class="progress is-info" :value="item.vegetable.age" :max="item.vegetable.span"></progress>
+                                <a class="button is-success" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
                             </div>
                         </div>
-                        <footer class="card-footer" v-if="item.vegetable.isHarvestable">
-                            <a class="card-footer-item" @click="harvest(item)">収穫</a>
-                        </footer>
                     </div>
                 </div>
             </transition-group>
@@ -44,19 +40,22 @@ import Vegetable from '../vegetable';
     }
 })
 export default class Fields extends Vue {
-    activated: boolean = false;
+    public activated: boolean = false;
 }
 </script>
 <style lang="scss" scoped>
-.card {
-    border-radius: 5px;
-}
-.bl-enter-active, .bl-leave-active {
+.vl-enter-active, .vl-leave-active {
   transition: all 1s;
 }
-.bl-enter, .bl-leave-to {
+.vl-enter, .vl-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(100px);
+}
+.vl-leave-active {
+  position: absolute;
+}
+.vl-move {
+  transition: transform .5s;
 }
 .earth {
     background: #A36840;

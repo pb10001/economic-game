@@ -6,9 +6,9 @@ export default class FieldModel {
         this.id = id;
     }
     public get vegetable(): Vegetable {
-        return this._vegetable
+        return this._vegetable;
     }
     public set vegetable(value: Vegetable) {
-        this._vegetable = value
+        this._vegetable = value;
     }
 }

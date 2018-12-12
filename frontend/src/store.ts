@@ -6,7 +6,7 @@ import AnnualReportModel from './annual-report';
 
 Vue.use(Vuex);
 interface State {
-  fields: FieldModel[]
+  fields: FieldModel[];
 }
 const agriCulture = {
   // モジュールごとにmutationsなどを分割できる(同じ名前でも)
@@ -31,30 +31,38 @@ const agriCulture = {
       new FieldModel(2),
       new FieldModel(3),
       new FieldModel(4),
-    ]
+    ],
   },
   mutations: {
+    gain(state: any, price: number) {
+      state.money += price;
+      if (state.money >= 0) {
+        /* プラスに転じた場合 */
+        state.gameOver = false;
+      }
+    },
     consume(state: any, price: number) {
-      if(state.gameOver) return;
+      if (state.gameOver) { return; }
       state.money -= price;
-      if(state.money < 0) {
-        /* 破綻 */
-        state.log += '破綻\n';
+      if (state.money < 0) {
+        /* マイナス */
+        state.log += '所持金がマイナスになりました\n';
         state.gameOver = true;
       }
     },
     report(state: any) {
-      let report = state.report;
+      const report = state.report;
       report.cash = state.money;
       report.land = state.fields.length * 50000;
-      state.reportLog += '【' + state.year + '年目　年次レポート】\n';
+      state.reportLog += '【年次レポート　' + state.year + '年目】\n';
       state.reportLog += report.toString() + '\n';
     },
     nextMonth(state: any) {
-      if(state.gameOver) return;
-      let fields: FieldModel[]  = state.fields;
-      fields.forEach(f => {
-        if(!f.vegetable.isEmpty()) {
+      if (state.gameOver) { return; }
+      state.log = '';
+      const fields: FieldModel[]  = state.fields;
+      fields.forEach((f) => {
+        if (!f.vegetable.isEmpty()) {
           state.report.cultivationCost += 100; // 栽培費用
           agriCulture.mutations.consume(state, 100);
         }
@@ -71,10 +79,10 @@ const agriCulture = {
       state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
     },
     seed(state: any, vegetable: Vegetable) {
-      if(state.gameOver) return;
-      for(let i=0;i<state.fields.length;i++) {
-        let f = state.fields[i];
-        if(f.vegetable.name==='空') {
+      if (state.gameOver) { return; }
+      for (let i = 0; i < state.fields.length; i++) {
+        const f = state.fields[i];
+        if (f.vegetable.isEmpty()) {
           f.vegetable = vegetable;
           state.report.purchaseCost += f.vegetable.initPrice; // 費用
           agriCulture.mutations.consume(state, f.vegetable.initPrice);
@@ -84,27 +92,58 @@ const agriCulture = {
       }
     },
     harvest(state: any, field: FieldModel) {
-      if(state.gameOver) return;
-      let r = Math.random();
-      if(r < field.vegetable.risk) {
+      const r = Math.random();
+      if (r < field.vegetable.risk) {
         state.log += field.vegetable.name + 'の収穫に失敗した!\n';
       } else {
         state.log += field.vegetable.name + 'を収穫した!\n';
         state.report.revenue += field.vegetable.value; // 売り上げ
-        state.money += field.vegetable.value;
+        agriCulture.mutations.gain(state, field.vegetable.value);
       }
       field.vegetable = Vegetable.empty();
     },
+    harvestAll(state: any) {
+      const fields: FieldModel[] = state.fields;
+      fields.filter((f) => f.vegetable.isHarvestable)
+        .forEach((field) => {
+          const v = field.vegetable;
+          const r = Math.random();
+          if (r < v.risk) {
+            state.log += v.name + 'の収穫に失敗した!\n';
+          } else {
+            state.log += v.name + 'を収穫した!\n';
+            state.report.revenue += v.value; // 売り上げ
+            agriCulture.mutations.gain(state, v.value);
+          }
+          field.vegetable = Vegetable.empty();
+        });
+    },
     addField(state: any) {
-      if(state.gameOver) return;
-      let id = state.fields.length + 1;
+      if (state.gameOver) { return; }
+      const id = state.fields.length + 1;
       state.fields.push(new FieldModel(id));
       agriCulture.mutations.consume(state, 50000);
     },
+    sellField(state: any) {
+      let fields: FieldModel[] = state.fields;
+      if (state.fields.length === 0) {
+        return;
+      }
+      let field: FieldModel = fields[0];
+      for (const item of fields) {
+        if (item.vegetable.isEmpty()) {
+          field = item;
+          break;
+        }
+      }
+      state.fields = fields.filter((f: FieldModel) => f !== field);
+      agriCulture.mutations.gain(state, 40000);
+      state.report.landLoss += 10000;
+    },
   },
   getters: {
-    fields(state: any) {return state.fields;}
-  }
+    fields(state: any) {return state.fields; },
+  },
 };
 
 export default new Vuex.Store({
