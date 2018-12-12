@@ -8,6 +8,9 @@ Vue.use(Vuex);
 interface State {
   fields: FieldModel[];
 }
+const LAND_PRICE: number = 50000;
+const LAND_VALUE: number = 40000;
+const CULTIVATION_COST: number = 500;
 const agriCulture = {
   // モジュールごとにmutationsなどを分割できる(同じ名前でも)
   namespaced: true,
@@ -17,7 +20,7 @@ const agriCulture = {
     log: '---1年目4月---\n',
     reportLog: '',
     report: new AnnualReportModel(1),
-    money: 1000,
+    money: 30000,
     year: 1,
     month : 4,
     gameOver: false,
@@ -53,7 +56,7 @@ const agriCulture = {
     report(state: any) {
       const report = state.report;
       report.cash = state.money;
-      report.land = state.fields.length * 50000;
+      report.land = state.fields.length * LAND_PRICE;
       state.reportLog += '【年次レポート　' + state.year + '年目】\n';
       state.reportLog += report.toString() + '\n';
     },
@@ -63,8 +66,8 @@ const agriCulture = {
       const fields: FieldModel[]  = state.fields;
       fields.forEach((f) => {
         if (!f.vegetable.isEmpty()) {
-          state.report.cultivationCost += 100; // 栽培費用
-          agriCulture.mutations.consume(state, 100);
+          state.report.cultivationCost += CULTIVATION_COST; // 栽培費用
+          agriCulture.mutations.consume(state, CULTIVATION_COST);
         }
         f.vegetable.getAge();
       });
@@ -122,7 +125,7 @@ const agriCulture = {
       if (state.gameOver) { return; }
       const id = state.fields.length + 1;
       state.fields.push(new FieldModel(id));
-      agriCulture.mutations.consume(state, 50000);
+      agriCulture.mutations.consume(state, LAND_PRICE);
     },
     sellField(state: any) {
       let fields: FieldModel[] = state.fields;
@@ -137,8 +140,8 @@ const agriCulture = {
         }
       }
       state.fields = fields.filter((f: FieldModel) => f !== field);
-      agriCulture.mutations.gain(state, 40000);
-      state.report.landLoss += 10000;
+      agriCulture.mutations.gain(state, LAND_VALUE);
+      state.report.landLoss += LAND_PRICE - LAND_VALUE;
     },
   },
   getters: {
