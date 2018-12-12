@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div>
-            <transition-group name="vl" class="columns is-multiline is-variable is-1">
+            <transition-group name="vl" class="columns is-multiline is-variable is-0">
                 <div class="column is-4" v-for="item in blocks" :key="item.id">
                     <div class="box earth has-text-white">
                         <div class="media">
