@@ -11,9 +11,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 const thickness: number = 10;
 interface IBoard {
-    setWall(id: number, x: number, y: number, isVertical: boolean);
-    setPiece(id: number, x: number, y: number, color: string);
-    alert();
+    setWall(id: number, x: number, y: number, isVertical: boolean): any;
+    setPiece(id: number, x: number, y: number, color: string): any;
+    alert(): void;
 }
 @Component({
     computed: {
