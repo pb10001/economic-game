@@ -10,6 +10,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 const thickness: number = 10;
+interface IBoard {
+    setWall,
+    setPiece,
+    alert 
+}
 @Component({
     computed: {
         lines() {
@@ -41,7 +46,7 @@ const thickness: number = 10;
                 return {id: 100 + id, x: 50 * x, y: 50 * y - thickness / 2, width: 100, height: 10};
             }
         },
-        setPiece(id: number, x: number, y: number, color: string){
+        setPiece(id: number, x: number, y: number, color: string) {
             return {id: 1000 + id, x: x * 50 - 25, y: y * 50 - 25, color: color};
         },
         alert() {
@@ -52,6 +57,6 @@ const thickness: number = 10;
         }
     }
 })
-export default class Proto extends Vue {
+export default class Proto extends Vue implements IBoard {
 }
 </script>
