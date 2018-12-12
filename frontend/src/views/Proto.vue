@@ -10,11 +10,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 const thickness: number = 10;
-interface IBoard {
-    setWall(id: number, x: number, y: number, isVertical: boolean): any;
-    setPiece(id: number, x: number, y: number, color: string): any;
-    alert(): void;
-}
+const setWall = (id: number, x: number, y: number, isVertical: boolean): any => {
+    if (isVertical) {
+        return {id: 100 + id, x: 50 * x - thickness / 2, y: 50 * y, width: 10, height: 100};
+    } else {
+        return {id: 100 + id, x: 50 * x, y: 50 * y - thickness / 2, width: 100, height: 10};
+    }
+};
+const setPiece = (id: number, x: number, y: number, color: string): any => {
+    return {id: 1000 + id, x: x * 50 - 25, y: y * 50 - 25, color: color};
+};
 @Component({
     computed: {
         lines() {
@@ -27,36 +32,26 @@ interface IBoard {
         },
         walls() {
             return [
-                this.setWall(1, 2, 3, false),
-                this.setWall(2, 5, 5, true),
+                setWall(1, 2, 3, false),
+                setWall(2, 5, 5, true),
             ];
         },
         pieces() {
             return [
-                this.setPiece(1, 5, 1, "white"),
-                this.setPiece(2, 5, 9, "black"),
+                setPiece(1, 5, 1, "white"),
+                setPiece(2, 5, 9, "black"),
             ];
         }
     },
     methods: {
-        setWall(id: number, x: number, y: number, isVertical: boolean) {
-            if (isVertical) {
-                return {id: 100 + id, x: 50 * x - thickness / 2, y: 50 * y, width: 10, height: 100};
-            } else {
-                return {id: 100 + id, x: 50 * x, y: 50 * y - thickness / 2, width: 100, height: 10};
-            }
-        },
-        setPiece(id: number, x: number, y: number, color: string) {
-            return {id: 1000 + id, x: x * 50 - 25, y: y * 50 - 25, color: color};
-        },
-        alert() {
+        alert(): void {
             this.$toast.open({
                 type: "is-danger",
                 message: "aaa"
             });
-        }
+        },
     }
 })
-export default class Proto extends Vue implements IBoard {
+export default class Proto extends Vue {
 }
 </script>
