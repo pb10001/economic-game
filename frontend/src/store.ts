@@ -25,9 +25,9 @@ const agriCulture = {
     month : 4,
     gameOver: false,
     vegetables: {
-      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.4, 200, 3000, '/img/cabbage.png'),
-      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 1200, '/img/carrot.png'),
-      onion: new Vegetable('タマネギ', [11, 12], 6, 0.2, 300, 4500, '/img/onion.png'),
+      cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.4, 200, 5000, '/img/cabbage.png'),
+      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 2000, '/img/carrot.png'),
+      onion: new Vegetable('タマネギ', [11, 12], 6, 0.2, 300, 6000, '/img/onion.png'),
     },
     fields: [
       new FieldModel(1),
