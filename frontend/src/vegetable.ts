@@ -12,7 +12,14 @@ export default class Vegetable {
     public url: string;
     public age: number = 0; // 植えられてからの時間
     public isHarvestable: boolean = false;
-    constructor(name: string, seed: number[], span: number, risk: number, initPrice: number, value: number, url?: string) {
+    constructor(
+        name: string,
+        seed: number[],
+        span: number,
+        risk: number,
+        initPrice: number,
+        value: number,
+        url?: string) {
         this.name = name;
         this.seed = seed;
         this.span = span;
