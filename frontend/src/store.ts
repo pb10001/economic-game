@@ -125,6 +125,7 @@ const agriCulture = {
       if (state.gameOver) { return; }
       const id = state.fields.length + 1;
       state.fields.push(new FieldModel(id));
+      state.log += '農地を拡大した!\n';
       agriCulture.mutations.consume(state, LAND_PRICE);
     },
     sellField(state: any) {
@@ -140,6 +141,7 @@ const agriCulture = {
         }
       }
       state.fields = fields.filter((f: FieldModel) => f !== field);
+      state.log += '農地を売却した!\n';
       agriCulture.mutations.gain(state, LAND_VALUE);
       state.report.landLoss += LAND_PRICE - LAND_VALUE;
     },
