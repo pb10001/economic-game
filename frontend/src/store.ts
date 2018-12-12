@@ -12,7 +12,6 @@ const LAND_PRICE: number = 50000;
 const LAND_VALUE: number = 40000;
 const CULTIVATION_COST: number = 500;
 const agriCulture = {
-  // モジュールごとにmutationsなどを分割できる(同じ名前でも)
   namespaced: true,
   state: {
     title : 'agriculture',
@@ -23,7 +22,7 @@ const agriCulture = {
     money: 30000,
     year: 1,
     month : 4,
-    gameOver: false,
+    minus: false,
     vegetables: {
       cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.4, 200, 5000, '/img/cabbage.png'),
       carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 2000, '/img/carrot.png'),
@@ -41,16 +40,16 @@ const agriCulture = {
       state.money += price;
       if (state.money >= 0) {
         /* プラスに転じた場合 */
-        state.gameOver = false;
+        state.minus = false;
       }
     },
     consume(state: any, price: number) {
-      if (state.gameOver) { return; }
+      if (state.minus) { return; }
       state.money -= price;
       if (state.money < 0) {
         /* マイナス */
         state.log += '所持金がマイナスになりました\n';
-        state.gameOver = true;
+        state.minus = true;
       }
     },
     report(state: any) {
@@ -61,7 +60,7 @@ const agriCulture = {
       state.reportLog += report.toString() + '\n';
     },
     nextMonth(state: any) {
-      if (state.gameOver) { return; }
+      if (state.minus) { return; }
       state.log = '';
       const fields: FieldModel[]  = state.fields;
       fields.forEach((f) => {
@@ -82,7 +81,7 @@ const agriCulture = {
       state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
     },
     seed(state: any, vegetable: Vegetable) {
-      if (state.gameOver) { return; }
+      if (state.minus) { return; }
       for (let i = 0; i < state.fields.length; i++) {
         const f = state.fields[i];
         if (f.vegetable.isEmpty()) {
@@ -122,7 +121,7 @@ const agriCulture = {
         });
     },
     addField(state: any) {
-      if (state.gameOver) { return; }
+      if (state.minus) { return; }
       const id = state.fields.length + 1;
       state.fields.push(new FieldModel(id));
       state.log += '農地を拡大した!\n';

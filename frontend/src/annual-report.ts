@@ -5,12 +5,16 @@ export default class AnnualReportModel {
     /* 資産 */
     public cash: number = 0; // 現金
     public land: number = 0; // 土地
+    /* 負債 */
+    public loan: number = 0; // 借入金
+    public accuredInterest: number = 0; // 未払利息
     /* 収益 */
-    public revenue: number = 0; // 売り上げ
+    public revenue: number = 0; // 売上
     /* 費用 */
-    public purchaseCost: number = 0; // 仕入れ費用
+    public purchaseCost: number = 0; // 仕入費用
     public cultivationCost: number = 0; // 栽培コスト
     public landLoss: number = 0; // 土地売却損
+    public interest: number = 0; // 支払利息
 
     constructor(year: number) {
         this.year = year;
