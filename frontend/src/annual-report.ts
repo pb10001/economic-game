@@ -54,7 +54,7 @@ export default class AnnualReportModel {
             '土地: ' + this.land + 'P',
             '負債: ' + this.totalDebt() + 'P',
             '純資産: ' + this.netAsset() + 'P',
-            '売上: ' + this.revenue + 'P',
+            '収益: ' + this.revenue + 'P',
             '費用: ' + this.totalCost() + 'P',
             '粗利: ' + this.netIncome() + 'P',
             '粗利率' + this.profitability() + '%',
