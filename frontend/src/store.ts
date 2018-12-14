@@ -27,7 +27,7 @@ const agriCulture = {
     minus: false,
     vegetables: {
       cabbage: new Vegetable('キャベツ', [3, 4, 5, 6], 4, 0.4, 200, 5000, '/img/cabbage.png'),
-      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 000, '/img/carrot.png'),
+      carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 3000, '/img/carrot.png'),
       onion: new Vegetable('タマネギ', [11, 12], 6, 0.2, 300, 6000, '/img/onion.png'),
     },
     fields: [
