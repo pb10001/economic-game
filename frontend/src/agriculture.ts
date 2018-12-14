@@ -74,14 +74,6 @@ const agriculture = {
         if (state.end) {return; }
         if (state.minus) { return; }
         state.log = '';
-        const fields: FieldModel[]  = state.fields;
-        fields.forEach((f) => {
-          if (!f.vegetable.isEmpty()) {
-            state.report.cultivationCost += CULTIVATION_COST; // 栽培費用
-            agriculture.mutations.consume(state, CULTIVATION_COST);
-          }
-          f.vegetable.getAge();
-        });
         const debts: Debt[] = state.debts;
         debts.forEach((d) => {
           d.increase();
@@ -101,6 +93,15 @@ const agriculture = {
           state.report = new AnnualReportModel(state.year);
           state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
         }
+        const fields: FieldModel[]  = state.fields;
+        fields.forEach((f) => {
+          if (!f.vegetable.isEmpty()) {
+            state.log += f.vegetable.name + 'を栽培した!\n';
+            state.report.cultivationCost += CULTIVATION_COST; // 栽培費用
+            agriculture.mutations.consume(state, CULTIVATION_COST);
+          }
+          f.vegetable.getAge();
+        });
       },
       seed(state: any, vegetable: Vegetable) {
         if (state.end) {return; }
