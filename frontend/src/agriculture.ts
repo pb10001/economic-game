@@ -5,7 +5,7 @@ import Debt from './debt';
 interface State {
     fields: FieldModel[];
 }
-const PERIOD = 50;
+const PERIOD = 40;
 const UNIT_DEBT: number  = 50000;
 const LAND_PRICE: number = 50000;
 const LAND_VALUE: number = 40000;

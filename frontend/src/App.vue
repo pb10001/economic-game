@@ -16,6 +16,9 @@
   text-align: center;
   color: #2c3e50;
 }
+.mb {
+  margin-bottom: 5px;
+}
 #nav {
   padding: 30px;
   a {

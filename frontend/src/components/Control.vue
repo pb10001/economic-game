@@ -2,7 +2,6 @@
     <div>
         <div class="buttons has-addons">
             <span @click="harvestAll" class="button is-primary is-outlined">すべて収穫</span>
-            <span class="button is-primary is-outlined">セーブ</span>
             <span @click="next" class="button is-primary is-outlined">次の月へ</span>
         </div>
         <div class="buttons has-addons">

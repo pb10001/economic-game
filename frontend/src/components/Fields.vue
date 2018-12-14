@@ -2,17 +2,17 @@
     <section>
         <div>
             <transition-group name="vl" class="columns is-multiline is-variable is-0">
-                <div class="column is-4" v-for="item in blocks" :key="item.id">
+                <div class="column is-3" v-for="item in blocks" :key="item.id">
                     <div class="box earth has-text-white">
                         <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-64x64">
+                            <div v-if="!item.vegetable.isEmpty()" class="media-left">
+                                <figure class="image is-64x64 mb">
                                     <img v-if="item.vegetable.url" :src="item.vegetable.url">
+                                    <progress class="progress is-success is-small" :value="item.vegetable.age" :max="item.vegetable.span"></progress>
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <p>{{item.vegetable.name}}</p>
-                                <progress class="progress is-info" :value="item.vegetable.age" :max="item.vegetable.span"></progress>
+                                <p v-if="!item.vegetable.isEmpty()">{{item.vegetable.name}}</p>
                                 <a class="button is-success" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
                             </div>
                         </div>

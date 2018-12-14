@@ -9,6 +9,10 @@
                         </div>
                         <div class="media-content">
                             <p class="title is-4">{{item.name}}</p>
+                            <div class="buttons has-addons">
+                                <a @click="seed(item)" class="button is-primary">植える</a>
+                                <a @click="seedAll(item)" class="button is-info">全畑に植える</a>
+                            </div>
                         </div>
                     </div>
                     <table>
@@ -33,10 +37,6 @@
                             <td>{{item.risk * 100}}%</td>
                         </tr>
                     </table>
-                </div>
-                <div class="buttons has-addons">
-                    <a @click="seed(item)" class="button is-primary">植える</a>
-                    <a @click="seedAll(item)" class="button is-info">全畑に植える</a>
                 </div>
             </div>
         </div>
