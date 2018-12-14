@@ -3,11 +3,13 @@ import Vuex from 'vuex';
 import Vegetable from './vegetable';
 import FieldModel from './field';
 import AnnualReportModel from './annual-report';
+import Debt from './debt';
 
 Vue.use(Vuex);
 interface State {
   fields: FieldModel[];
 }
+const UNIT_DEBT: number  = 50000;
 const LAND_PRICE: number = 50000;
 const LAND_VALUE: number = 40000;
 const CULTIVATION_COST: number = 500;
@@ -34,6 +36,8 @@ const agriCulture = {
       new FieldModel(3),
       new FieldModel(4),
     ],
+    debts: [
+    ],
   },
   mutations: {
     gain(state: any, price: number) {
@@ -53,10 +57,17 @@ const agriCulture = {
       }
     },
     report(state: any) {
-      const report = state.report;
+      const report: AnnualReportModel = state.report;
       report.cash = state.money;
       report.land = state.fields.length * LAND_PRICE;
+      report.debt = state.debts.length * UNIT_DEBT;
+      report.accuredInterest = state.debts.reduce((acc: number, next: Debt) => {
+        return acc + next.total - next.principal;
+      }, 0);
       state.reportLog += '【年次レポート　' + state.year + '年目】\n';
+      if(report.netAsset() < 0) {
+        state.reportLog += '***債務超過***\n';
+      }
       state.reportLog += report.toString() + '\n';
     },
     nextMonth(state: any) {
@@ -69,6 +80,10 @@ const agriCulture = {
           agriCulture.mutations.consume(state, CULTIVATION_COST);
         }
         f.vegetable.getAge();
+      });
+      const debts: Debt[] = state.debts;
+      debts.forEach((d) => {
+        d.increase();
       });
       if (state.month < 12) {
         state.month++;
@@ -128,7 +143,7 @@ const agriCulture = {
       agriCulture.mutations.consume(state, LAND_PRICE);
     },
     sellField(state: any) {
-      let fields: FieldModel[] = state.fields;
+      const fields: FieldModel[] = state.fields;
       if (state.fields.length === 0) {
         return;
       }
@@ -144,6 +159,15 @@ const agriCulture = {
       agriCulture.mutations.gain(state, LAND_VALUE);
       state.report.landLoss += LAND_PRICE - LAND_VALUE;
     },
+    borrowMoney(state: any) {
+      state.debts.push(new Debt(UNIT_DEBT, 0.0153));
+      agriCulture.mutations.gain(state, UNIT_DEBT);
+    },
+    payback(state: any, item: Debt) {
+      if (state.minus) {return; }
+      state.debts = state.debts.filter((d: Debt) => d !== item);
+      agriCulture.mutations.consume(state, item.total);
+    }
   },
   getters: {
     fields(state: any) {return state.fields; },

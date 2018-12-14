@@ -8,6 +8,7 @@
                 <div id="controls">
                     <Control />
                 </div>
+                <Debts />
                 <Fields />
                 <Catalogue />
             </div>
@@ -20,6 +21,7 @@ import Fields from '@/components/Fields.vue';
 import Control from '@/components/Control.vue';
 import Status from '@/components/Status.vue';
 import Catalogue from '@/components/Catalogue.vue';
+import Debts from '@/components/Debts.vue';
 
 @Component({
     components: {
@@ -27,6 +29,7 @@ import Catalogue from '@/components/Catalogue.vue';
         Control,
         Status,
         Catalogue,
+        Debts,
     },
 })
 export default class Agriculture extends Vue {

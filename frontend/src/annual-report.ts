@@ -6,7 +6,7 @@ export default class AnnualReportModel {
     public cash: number = 0; // 現金
     public land: number = 0; // 土地
     /* 負債 */
-    public loan: number = 0; // 借入金
+    public debt: number = 0; // 借入金
     public accuredInterest: number = 0; // 未払利息
     /* 収益 */
     public revenue: number = 0; // 売上
@@ -19,13 +19,25 @@ export default class AnnualReportModel {
     constructor(year: number) {
         this.year = year;
     }
-    public totalCost(): number {
-        /* 費用の合計 */
-        return this.purchaseCost + this.cultivationCost + this.landLoss;
+    public totalAsset(): number {
+        /* 資産の合計 */
+        return this.cash + this.land;
+    }
+    public totalDebt(): number {
+        /* 負債の合計 */
+        return this.debt + this.accuredInterest;
     }
     public netAsset(): number {
         /* 純資産 */
-        return this.cash + this.land;
+        return this.totalAsset() - this.totalDebt();
+    }
+    public totalGain(): number {
+        /* 収益の合計 */
+        return this.revenue;
+    }
+    public totalCost(): number {
+        /* 費用の合計 */
+        return this.purchaseCost + this.cultivationCost + this.landLoss;
     }
     public netIncome(): number {
         /* 粗利 */
@@ -40,6 +52,7 @@ export default class AnnualReportModel {
         return [
             '現金: ' + this.cash + 'P',
             '土地: ' + this.land + 'P',
+            '負債: ' + this.totalDebt() + 'P',
             '純資産: ' + this.netAsset() + 'P',
             '売上: ' + this.revenue + 'P',
             '費用: ' + this.totalCost() + 'P',

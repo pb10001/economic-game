@@ -40,7 +40,6 @@ import Vegetable from '../vegetable';
     }
 })
 export default class Fields extends Vue {
-    public activated: boolean = false;
 }
 </script>
 <style lang="scss" scoped>

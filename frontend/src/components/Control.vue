@@ -8,6 +8,7 @@
         <div class="buttons has-addons">
             <span @click="addField" class="button is-danger is-outlined">農地拡大</span>
             <span @click="sellField" class="button is-danger is-outlined">農地売却</span>
+            <span @click="borrow" class="button is-danger is-outlined">借金</span>
         </div>
     </div>
 </template>
@@ -39,6 +40,12 @@ import Vegetable from '../vegetable';
             this.$dialog.confirm({
                 message:'40000Pで農地を1つ手放します。続けますか？',
                 onConfirm: () => this.$store.commit('agriCulture/sellField'),
+            })
+        },
+        borrow() {
+            this.$dialog.confirm({
+                message:'50000Pを借ります。\n年利約20%(月利1.53%複利、10円未満は切り捨て)です。\n続けますか？',
+                onConfirm: () => this.$store.commit('agriCulture/borrowMoney'),
             })
         },
     },
