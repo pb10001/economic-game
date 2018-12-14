@@ -14,7 +14,7 @@ export default class AnnualReportModel {
     public purchaseCost: number = 0; // 仕入費用
     public cultivationCost: number = 0; // 栽培コスト
     public landLoss: number = 0; // 土地売却損
-    public interest: number = 0; // 支払利息
+    public interestExpense: number = 0; // 支払利息
 
     constructor(year: number) {
         this.year = year;
@@ -37,7 +37,7 @@ export default class AnnualReportModel {
     }
     public totalCost(): number {
         /* 費用の合計 */
-        return this.purchaseCost + this.cultivationCost + this.landLoss + this.interest;
+        return this.purchaseCost + this.cultivationCost + this.landLoss + this.interestExpense;
     }
     public netIncome(): number {
         /* 粗利 */
@@ -61,7 +61,7 @@ export default class AnnualReportModel {
             '- 種購入費: ' + this.purchaseCost + 'P',
             '- 栽培費: ' + this.cultivationCost + 'P',
             '- 土地売却損: ' + this.landLoss + 'P',
-            '- 支払利息: ' + this.interest + 'P',
+            '- 支払利息: ' + this.interestExpense + 'P',
             '------',
             '粗利: ' + this.netIncome() + 'P',
             '粗利率' + this.profitability() + '%',

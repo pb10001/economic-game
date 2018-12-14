@@ -14,6 +14,7 @@ export default class Debt {
         this.principal = principal;
         this.interestRate = interestRate;
         this.total = principal;
+        this.increase();
     }
     public increase(): number {
         this.total += Math.floor(this.total * this.interestRate / 10) * 10;

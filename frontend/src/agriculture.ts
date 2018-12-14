@@ -63,9 +63,8 @@ const agriculture = {
         report.cash = state.money;
         report.land = state.fields.length * LAND_PRICE;
         report.debt = state.debts.length * UNIT_DEBT;
-        report.accuredInterest = state.debts.reduce((acc: number, next: Debt) => {
-          return acc + next.total - next.principal;
-        }, 0);
+
+
         state.reportLog += '【年次レポート　' + state.year + '年目】\n';
         if (report.netAsset() < 0) {
           state.reportLog += '***債務超過***\n';
@@ -88,11 +87,23 @@ const agriculture = {
           /* ゲームを終了して最終結果を作成 */
           state.log += '終了\n';
           state.end = true;
+          return;
         } else {
+          /* 費用の見越し */
+          const interest = state.debts.reduce((acc: number, next: Debt) => {
+            return acc + next.total - next.principal;
+          }, 0);
+          state.report.interestExpense += interest;
+          state.report.accuredInterest = interest;
+
           agriculture.mutations.report(state); // 年次報告を作成
           state.year++;
           state.month = 1;
           state.report = new AnnualReportModel(state.year);
+
+          /* 期首再振替 */
+          state.report.interestExpense -= interest;
+
           state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
         }
         const fields: FieldModel[]  = state.fields;
@@ -195,7 +206,7 @@ const agriculture = {
         if (state.end) {return; }
         if (state.minus) {return; }
         state.debts = state.debts.filter((d: Debt) => d !== item);
-        state.report.interest += item.total - item.principal; // 支払利息
+        state.report.interestExpense += item.total - item.principal; // 支払利息
         agriculture.mutations.consume(state, item.total);
       },
     },
