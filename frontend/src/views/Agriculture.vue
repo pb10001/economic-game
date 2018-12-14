@@ -2,12 +2,12 @@
     <div>
         <div class="columns">
             <div id="status" class="column is-3">
-                <Status />
-            </div>
-            <div id="field" class="column is-9">
                 <div id="controls">
                     <Control />
                 </div>
+                <Status />
+            </div>
+            <div id="field" class="column is-9">
                 <Debts />
                 <Fields />
                 <Catalogue />

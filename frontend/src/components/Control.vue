@@ -22,30 +22,30 @@ import Vegetable from '../vegetable';
     },
     methods: {
         next() {
-            this.$store.commit('agriCulture/nextMonth');
+            this.$store.commit('agriculture/nextMonth');
         },
         seed(item: Vegetable) {
-            this.$store.commit('agriCulture/seed', item.copy());
+            this.$store.commit('agriculture/seed', item.copy());
         },
         harvestAll() {
-            this.$store.commit('agriCulture/harvestAll');
+            this.$store.commit('agriculture/harvestAll');
         },
         addField() {
             this.$dialog.confirm({
                 message:'50000P消費します。続けますか？',
-                onConfirm: () => this.$store.commit('agriCulture/addField'),
+                onConfirm: () => this.$store.commit('agriculture/addField'),
             })
         },
         sellField() {
             this.$dialog.confirm({
                 message:'40000Pで農地を1つ手放します。続けますか？',
-                onConfirm: () => this.$store.commit('agriCulture/sellField'),
+                onConfirm: () => this.$store.commit('agriculture/sellField'),
             })
         },
         borrow() {
             this.$dialog.confirm({
                 message:'50000Pを借ります。\n年利約20%(月利1.53%複利、10円未満は切り捨て)です。\n続けますか？',
-                onConfirm: () => this.$store.commit('agriCulture/borrowMoney'),
+                onConfirm: () => this.$store.commit('agriculture/borrowMoney'),
             })
         },
     },

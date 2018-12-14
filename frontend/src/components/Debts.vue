@@ -1,5 +1,5 @@
 <template>
-    <section class="section">
+    <section v-if="debts.length > 0">
         <div>
             <transition-group name="vl" class="columns is-multiline is-variable is-0">
                 <div class="column is-4" v-for="item in debts" :key="item.id">
@@ -22,12 +22,12 @@ import Debt from '../debt';
 @Component({
     computed: {
         debts(): Debt[] {
-            return this.$store.state.agriCulture.debts;
+            return this.$store.state.agriculture.debts;
         }
     },
     methods: {
         payback(item: Debt): void {
-            this.$store.commit('agriCulture/payback', item);
+            this.$store.commit('agriculture/payback', item);
         }
     }
 })

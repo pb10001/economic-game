@@ -1,16 +1,11 @@
 <template>
-    <div>
-        <div class="section">
-            <div class="notification is-info">
-                <p>{{currentYear}}年目，{{currentMonth}}月</p>
-                <p>所持金:{{currentMoney}}P</p>
-            </div>
-            <div class="box">
-                <p class="multiline">{{log}}</p>
-            </div>
-            <div class="box">
-                <p class="multiline">{{reportLog}}</p>
-            </div>
+    <div class="section">
+        <p class="subtitle">所持金:{{currentMoney}}P</p>
+        <div class="box">
+            <p class="multiline">{{log}}</p>
+        </div>
+        <div class="box">
+            <p class="multiline">{{reportLog}}</p>
         </div>
     </div>
 </template>
@@ -19,19 +14,19 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
     computed: {
         currentYear() {
-            return this.$store.state.agriCulture.year;
+            return this.$store.state.agriculture.year;
         },
         currentMonth() {
-            return this.$store.state.agriCulture.month;
+            return this.$store.state.agriculture.month;
         },
         currentMoney() {
-            return this.$store.state.agriCulture.money;
+            return this.$store.state.agriculture.money;
         },
         log() {
-            return this.$store.state.agriCulture.log;
+            return this.$store.state.agriculture.log;
         },
         reportLog() {
-            return this.$store.state.agriCulture.reportLog;
+            return this.$store.state.agriculture.reportLog;
         },
     }
 })
@@ -43,6 +38,7 @@ export default class Status extends Vue{
     max-height: 250px;
     overflow-y: scroll;
     .multiline {
+        text-align: left;
         white-space: pre-wrap;
     }
 }

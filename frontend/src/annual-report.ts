@@ -37,7 +37,7 @@ export default class AnnualReportModel {
     }
     public totalCost(): number {
         /* 費用の合計 */
-        return this.purchaseCost + this.cultivationCost + this.landLoss;
+        return this.purchaseCost + this.cultivationCost + this.landLoss + this.interest;
     }
     public netIncome(): number {
         /* 粗利 */
@@ -50,12 +50,19 @@ export default class AnnualReportModel {
     public toString(): string {
         /* 文字列化 */
         return [
-            '現金: ' + this.cash + 'P',
-            '土地: ' + this.land + 'P',
-            '負債: ' + this.totalDebt() + 'P',
             '純資産: ' + this.netAsset() + 'P',
-            '売上: ' + this.revenue + 'P',
+            '- 現金: ' + this.cash + 'P',
+            '- 土地: ' + this.land + 'P',
+            '- 借金(元本): ' + this.debt + 'P',
+            '- 未払利息: ' + this.accuredInterest + 'P',
+            '収益: ' + this.revenue + 'P',
+            '- 売上: ' + this.revenue + 'P',
             '費用: ' + this.totalCost() + 'P',
+            '- 種購入費: ' + this.purchaseCost + 'P',
+            '- 栽培費: ' + this.cultivationCost + 'P',
+            '- 土地売却損: ' + this.landLoss + 'P',
+            '- 支払利息: ' + this.interest + 'P',
+            '------',
             '粗利: ' + this.netIncome() + 'P',
             '粗利率' + this.profitability() + '%',
         ].join('\n');

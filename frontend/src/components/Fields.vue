@@ -1,5 +1,5 @@
 <template>
-    <section class="section">
+    <section>
         <div>
             <transition-group name="vl" class="columns is-multiline is-variable is-0">
                 <div class="column is-4" v-for="item in blocks" :key="item.id">
@@ -30,12 +30,12 @@ import Vegetable from '../vegetable';
 @Component({
     computed: {
         blocks() {
-            return this.$store.state.agriCulture.fields
+            return this.$store.state.agriculture.fields
         }
     },
     methods: {
         harvest(item: FieldModel) {
-            this.$store.commit("agriCulture/harvest", item);
+            this.$store.commit("agriculture/harvest", item);
         }
     }
 })
