@@ -29,7 +29,7 @@ const agriculture = {
         carrot: new Vegetable('ニンジン', [4, 5, 6, 7], 3, 0.1, 100, 3000, '/img/carrot.png'),
         onion: new Vegetable('タマネギ', [11, 12], 6, 0.2, 300, 6000, '/img/onion.png'),
         daikon: new Vegetable('ダイコン', [3, 4, 8, 9], 3, 0.2, 200, 2500),
-        spinach: new Vegetable('ホウレンソウ', [3, 4, 9, 10], 1, 0.5, 100, 2000),
+        spinach: new Vegetable('ホウレンソウ', [3, 4, 9, 10], 1, 0.5, 100, 2000, '/img/spinach.png'),
       },
       fields: [
         new FieldModel(1),
