@@ -93,8 +93,8 @@ const agriculture = {
           const interest = state.debts.reduce((acc: number, next: Debt) => {
             return acc + next.total - next.principal;
           }, 0);
-          state.report.interestExpense += interest;
-          state.report.accuredInterest = interest;
+          state.report.interestExpense += interest; // 支払利息の見越し
+          state.report.accuredInterest = interest; // 未払利息
 
           agriculture.mutations.report(state); // 年次報告を作成
           state.year++;
@@ -102,7 +102,7 @@ const agriculture = {
           state.report = new AnnualReportModel(state.year);
 
           /* 期首再振替 */
-          state.report.interestExpense -= interest;
+          state.report.interestExpense -= interest; // 前期末の支払利息を相殺
 
           state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
         }
