@@ -19,6 +19,7 @@ const agriculture = {
       log: '---1年目4月---\n',
       reportLog: '',
       report: new AnnualReportModel(1),
+      pastReports: [],
       money: 30000,
       year: 1,
       month : 4,
@@ -65,7 +66,7 @@ const agriculture = {
         report.debt = state.debts.length * UNIT_DEBT;
 
 
-        state.reportLog += '【年次レポート　' + state.year + '年目】\n';
+        state.reportLog = '【年次レポート　' + state.year + '年目】\n';
         if (report.netAsset() < 0) {
           state.reportLog += '***債務超過***\n';
         }
@@ -84,6 +85,8 @@ const agriculture = {
           state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
         } else if (state.year >= PERIOD) {
           agriculture.mutations.report(state); // 年次報告を作成
+          const r = Object.assign({}, state.report);
+          state.pastReports.push(r);
           /* ゲームを終了して最終結果を作成 */
           state.log += '終了\n';
           state.end = true;
@@ -99,7 +102,9 @@ const agriculture = {
           agriculture.mutations.report(state); // 年次報告を作成
           state.year++;
           state.month = 1;
-          state.report = new AnnualReportModel(state.year);
+          const r = Object.assign({}, state.report);
+          state.pastReports.push(r);
+          state.report = new AnnualReportModel(state.year); // 次年度のレポートを用意
 
           /* 期首再振替 */
           state.report.interestExpense -= interest; // 前期末の支払利息を相殺

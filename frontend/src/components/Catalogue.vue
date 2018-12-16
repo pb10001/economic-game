@@ -1,45 +1,47 @@
 <template>
-    <div class="columns is-multiline is-variable is-1">
-        <div class="column is-4" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
-            <div class="box">
-                <div class="content">
-                    <div class="media">
-                        <div class="media-left">
-                            <img :src="item.url" width="64">
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">{{item.name}}</p>
-                            <div class="buttons has-addons">
-                                <a @click="seed(item)" class="button is-primary">植える</a>
-                                <a @click="seedAll(item)" class="button is-info">全畑に植える</a>
+    <div class="flex">
+        <transition-group name="vl" class="flex">
+            <div class="" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
+                <div class="box">
+                    <div class="content">
+                        <div class="media">
+                            <div class="media-left">
+                                <img :src="item.url" width="64">
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{item.name}}</p>
+                                <div class="buttons has-addons">
+                                    <a @click="seed(item)" class="button is-primary">植える</a>
+                                    <a @click="seedAll(item)" class="button is-info">全畑に植える</a>
+                                </div>
                             </div>
                         </div>
+                        <table>
+                            <tr>
+                                <th>項目</th>
+                                <th>値</th>
+                            </tr>
+                            <tr>
+                                <td>種の価格</td>
+                                <td>{{item.initPrice}}P</td>
+                            </tr>
+                            <tr>
+                                <td>栽培期間</td>
+                                <td>{{item.span}}ヶ月</td>
+                            </tr>
+                            <tr>
+                                <td>販売価格</td>
+                                <td>{{item.value}}P</td>
+                            </tr>
+                            <tr>
+                                <td>リスク</td>
+                                <td>{{item.risk * 100}}%</td>
+                            </tr>
+                        </table>
                     </div>
-                    <table>
-                        <tr>
-                            <th>項目</th>
-                            <th>値</th>
-                        </tr>
-                        <tr>
-                            <td>種の価格</td>
-                            <td>{{item.initPrice}}P</td>
-                        </tr>
-                        <tr>
-                            <td>栽培期間</td>
-                            <td>{{item.span}}ヶ月</td>
-                        </tr>
-                        <tr>
-                            <td>販売価格</td>
-                            <td>{{item.value}}P</td>
-                        </tr>
-                        <tr>
-                            <td>リスク</td>
-                            <td>{{item.risk * 100}}%</td>
-                        </tr>
-                    </table>
                 </div>
             </div>
-        </div>
+        </transition-group>
     </div>
 </template>
 <script lang="ts">
@@ -68,3 +70,18 @@ import Vegetable from '../vegetable';
 export default class Catalogue extends Vue {
 }
 </script>
+<style lang="scss" scoped>
+.vl-enter-active, .vl-leave-active {
+  transition: all .5s;
+}
+.vl-enter, .vl-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.vl-leave-active {
+  position: absolute;
+}
+.vl-move {
+  transition: transform .5s;
+}
+</style>

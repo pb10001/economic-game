@@ -1,8 +1,8 @@
 <template>
     <section v-if="debts.length > 0">
         <div>
-            <transition-group name="vl" class="columns is-multiline is-variable is-0">
-                <div class="column is-4" v-for="item in debts" :key="item.id">
+            <transition-group name="vl" class="flex">
+                <div class="" v-for="item in debts" :key="item.id">
                     <div class="box has-background-danger has-text-white">
                         <div class="content">
                             <p>元本: {{item.principal}}</p>
@@ -36,11 +36,11 @@ export default class Debts extends Vue {
 </script>
 <style lang="scss" scoped>
 .vl-enter-active, .vl-leave-active {
-  transition: all 1s;
+  transition: all .5s;
 }
 .vl-enter, .vl-leave-to {
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(-30px);
 }
 .vl-leave-active {
   position: absolute;

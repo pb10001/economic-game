@@ -7,11 +7,24 @@
         <div class="box">
             <p class="multiline">{{reportLog}}</p>
         </div>
+        <b-modal :active.sync="isChartVisible">
+            <Chart />
+        </b-modal>
+        <button @click="isChartVisible = true" class="button is-info">グラフを表示</button>
     </div>
 </template>
 <script>
 import { Component, Vue } from 'vue-property-decorator';
+import Chart from '@/components/Chart.vue';
 @Component({
+    components: {
+        Chart,
+    },
+    data () {
+        return {
+            isChartVisible: false
+        }
+    },
     computed: {
         currentYear() {
             return this.$store.state.agriculture.year;
@@ -28,7 +41,7 @@ import { Component, Vue } from 'vue-property-decorator';
         reportLog() {
             return this.$store.state.agriculture.reportLog;
         },
-    }
+    },
 })
 export default class Status extends Vue{
 }

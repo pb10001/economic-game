@@ -2,12 +2,10 @@
     <div>
         <div class="buttons has-addons">
             <span @click="harvestAll" class="button is-primary is-outlined">すべて収穫</span>
-            <span @click="next" class="button is-primary is-outlined">次の月へ</span>
-        </div>
-        <div class="buttons has-addons">
             <span @click="addField" class="button is-danger is-outlined">農地拡大</span>
             <span @click="sellField" class="button is-danger is-outlined">農地売却</span>
             <span @click="borrow" class="button is-danger is-outlined">借金</span>
+            <span @click="next" class="button is-primary is-outlined">次の月へ</span>
         </div>
     </div>
 </template>

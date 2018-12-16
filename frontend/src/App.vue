@@ -19,6 +19,10 @@
 .mb {
   margin-bottom: 5px;
 }
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
 #nav {
   padding: 30px;
   a {

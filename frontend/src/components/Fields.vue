@@ -1,8 +1,8 @@
 <template>
     <section>
         <div>
-            <transition-group name="vl" class="columns is-multiline is-variable is-0">
-                <div class="column is-3" v-for="item in blocks" :key="item.id">
+            <transition-group name="vl" class="flex">
+                <div class="" v-for="item in blocks" :key="item.id">
                     <div class="box earth has-text-white">
                         <div class="media">
                             <div v-if="!item.vegetable.isEmpty()" class="media-left">
@@ -13,7 +13,7 @@
                             </div>
                             <div class="media-content">
                                 <p v-if="!item.vegetable.isEmpty()">{{item.vegetable.name}}</p>
-                                <a class="button is-success" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
+                                <a class="button is-primary" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
                             </div>
                         </div>
                     </div>
@@ -44,11 +44,11 @@ export default class Fields extends Vue {
 </script>
 <style lang="scss" scoped>
 .vl-enter-active, .vl-leave-active {
-  transition: all 1s;
+  transition: all .5s;
 }
 .vl-enter, .vl-leave-to {
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(-30px);
 }
 .vl-leave-active {
   position: absolute;

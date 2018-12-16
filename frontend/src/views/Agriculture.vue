@@ -2,15 +2,17 @@
     <div>
         <div class="columns">
             <div id="status" class="column is-3">
+                <Status />
+            </div>
+            <div id="field" class="column is-9 section">
                 <div id="controls">
                     <Control />
                 </div>
-                <Status />
-            </div>
-            <div id="field" class="column is-9">
-                <Debts />
-                <Fields />
-                <Catalogue />
+                <div class="box has-background-light">
+                    <Debts />
+                    <Fields />
+                    <Catalogue />
+                </div >
             </div>
         </div>
     </div>
