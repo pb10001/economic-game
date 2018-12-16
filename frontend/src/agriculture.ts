@@ -65,7 +65,6 @@ const agriculture = {
         report.land = state.fields.length * LAND_PRICE;
         report.debt = state.debts.length * UNIT_DEBT;
 
-
         state.reportLog = '【年次レポート　' + state.year + '年目】\n';
         if (report.netAsset() < 0) {
           state.reportLog += '***債務超過***\n';
@@ -85,7 +84,7 @@ const agriculture = {
           state.log += '---' + state.year + '年目' + state.month + '月' + '---\n';
         } else if (state.year >= PERIOD) {
           agriculture.mutations.report(state); // 年次報告を作成
-          const r = Object.assign({}, state.report);
+          const r: AnnualReportModel = state.report.copy();
           state.pastReports.push(r);
           /* ゲームを終了して最終結果を作成 */
           state.log += '終了\n';
@@ -102,7 +101,7 @@ const agriculture = {
           agriculture.mutations.report(state); // 年次報告を作成
           state.year++;
           state.month = 1;
-          const r = Object.assign({}, state.report);
+          const r: AnnualReportModel = state.report.copy();
           state.pastReports.push(r);
           state.report = new AnnualReportModel(state.year); // 次年度のレポートを用意
 

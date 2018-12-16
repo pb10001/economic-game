@@ -19,6 +19,20 @@ export default class AnnualReportModel {
     constructor(year: number) {
         this.year = year;
     }
+    public copy(): AnnualReportModel {
+        /* コピー */
+        const report = new AnnualReportModel(this.year);
+        report.cash = this.cash;
+        report.land = this.land;
+        report.debt = this.debt;
+        report.accuredInterest = this.accuredInterest;
+        report.revenue = this.revenue;
+        report.purchaseCost = this.purchaseCost;
+        report.cultivationCost = this.cultivationCost;
+        report.landLoss = this.landLoss;
+        report.interestExpense = this.interestExpense;
+        return report;
+    }
     public totalAsset(): number {
         /* 資産の合計 */
         return this.cash + this.land;
