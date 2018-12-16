@@ -8,7 +8,7 @@
             <p class="multiline">{{reportLog}}</p>
         </div>
         <b-modal :active.sync="isChartVisible" scroll="keep">
-            <div class="box">
+            <div class="card">
                 <Chart />
             </div>
         </b-modal>
