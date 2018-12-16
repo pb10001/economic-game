@@ -8,7 +8,9 @@
             <p class="multiline">{{reportLog}}</p>
         </div>
         <b-modal :active.sync="isChartVisible">
-            <Chart />
+            <div class="box">
+                <Chart />
+            </div>
         </b-modal>
         <button @click="isChartVisible = true" class="button is-info">グラフを表示</button>
     </div>

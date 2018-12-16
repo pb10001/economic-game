@@ -41,7 +41,7 @@ export default {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: '作者'
+          text: '収益と費用'
         },
         legend: {
           position: 'bottom'
