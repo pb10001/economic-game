@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p class="subtitle">所持金:{{currentMoney}}P</p>
         <div class="buttons has-addons">
             <span @click="harvestAll" class="button is-primary is-outlined">すべて収穫</span>
             <span @click="addField" class="button is-danger is-outlined">農地拡大</span>
@@ -14,6 +15,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import Vegetable from '../vegetable';
 @Component({
     computed: {
+        currentMoney() {
+            return this.$store.state.agriculture.money;
+        },
     },
     mounted() {
     },

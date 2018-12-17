@@ -1,18 +1,21 @@
 <template>
     <div>
-        <div class="columns">
-            <div id="status" class="column is-3">
-                <Status />
-            </div>
-            <div id="field" class="column is-9 section">
-                <div id="controls">
-                    <Control />
-                </div>
-                <div class="box has-background-light">
-                    <Debts />
+        <div class="box has-background-light">
+            <div class="columns">
+                <div id="status" class="column is-6">
+                    <Control class="mb" />
                     <Fields />
-                    <Catalogue />
-                </div >
+                    <Debts />
+                    <div class="columns">
+                        <Status class="column" />
+                        <AnnualReport class="column" />
+                    </div>
+                </div>
+                <div id="field" class="column is-6 section">
+                    <div id="controls">
+                        <Catalogue />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,6 +27,7 @@ import Control from '@/components/Control.vue';
 import Status from '@/components/Status.vue';
 import Catalogue from '@/components/Catalogue.vue';
 import Debts from '@/components/Debts.vue';
+import AnnualReport from '@/components/AnnualReport.vue';
 
 @Component({
     components: {
@@ -32,6 +36,7 @@ import Debts from '@/components/Debts.vue';
         Status,
         Catalogue,
         Debts,
+        AnnualReport,
     },
 })
 export default class Agriculture extends Vue {
