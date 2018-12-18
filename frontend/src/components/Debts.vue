@@ -7,7 +7,7 @@
                         <div class="content">
                             <p>元本: {{item.principal}}</p>
                             <p>合計額: {{item.total}}</p>
-                            <a class="button is-success" @click="payback(item)">返済</a>
+                            <a class="button is-success is-small" @click="payback(item)">返済</a>
                         </div>
                     </div>
                 </div>

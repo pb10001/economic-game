@@ -1,6 +1,6 @@
 <template>
-    <div class="section">
-        <div class="box">
+    <div>
+        <div class="section has-background-white scrollable mb">
             <p class="multiline">{{reportLog}}</p>
         </div>
         <b-modal :active.sync="isChartVisible" scroll="keep">
@@ -8,7 +8,7 @@
                 <Chart />
             </div>
         </b-modal>
-        <button @click="isChartVisible = true" class="button is-info">グラフを表示</button>
+        <button @click="isChartVisible = true" class="button is-info is-small">グラフを表示</button>
     </div>
 </template>
 <script>
@@ -42,7 +42,7 @@ export default class AnnualReport extends Vue{
 }
 </script>
 <style lang="scss" scoped>
-.box {
+.scrollable {
     max-height: 250px;
     overflow-y: scroll;
     .multiline {

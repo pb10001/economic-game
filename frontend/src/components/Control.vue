@@ -2,12 +2,32 @@
     <div>
         <p class="subtitle">所持金:{{currentMoney}}P</p>
         <div class="buttons has-addons">
-            <span @click="harvestAll" class="button is-primary is-outlined">すべて収穫</span>
-            <span @click="addField" class="button is-danger is-outlined">農地拡大</span>
-            <span @click="sellField" class="button is-danger is-outlined">農地売却</span>
-            <span @click="borrow" class="button is-danger is-outlined">借金</span>
-            <span @click="next" class="button is-primary is-outlined">次の月へ</span>
+            <span @click="harvestAll" class="button is-success is-small">すべて収穫</span>
+            <span @click="addField" class="button is-success is-small">農地拡大</span>
+            <span @click="sellField" class="button is-danger is-small">農地売却</span>
+            <span @click="borrow" class="button is-danger is-small">借金</span>
+            <span @click="next" class="button is-success is-small">次の月へ</span>
         </div>
+        <transition-group name="vl" class="flex">
+            <div class="" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
+                <div class="box">
+                    <div class="content">
+                        <div class="media">
+                            <div class="media-left">
+                                <img :src="item.url" width="48">
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-6">{{item.name}}</p>
+                                <div class="buttons has-addons">
+                                    <a @click="seed(item)" class="button is-primary is-small">植える</a>
+                                    <a @click="seedAll(item)" class="button is-info is-small">全畑に植える</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition-group>
     </div>
 </template>
 <script lang="ts">
@@ -17,6 +37,12 @@ import Vegetable from '../vegetable';
     computed: {
         currentMoney() {
             return this.$store.state.agriculture.money;
+        },
+        currentMonth() {
+            return this.$store.state.agriculture.month;
+        },
+        veges() {
+            return this.$store.state.agriculture.vegetables;
         },
     },
     mounted() {
@@ -48,6 +74,9 @@ import Vegetable from '../vegetable';
                 message:'50000Pを借ります。\n年利約20%(月利1.53%複利、10円未満は切り捨て)です。\n続けますか？',
                 onConfirm: () => this.$store.commit('agriculture/borrowMoney'),
             })
+        },
+        seedAll(item: Vegetable) {
+            this.$store.commit('agriculture/seedAll', item);
         },
     },
 })

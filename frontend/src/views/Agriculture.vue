@@ -1,21 +1,23 @@
 <template>
     <div>
-        <div class="box has-background-light">
-            <div class="columns">
-                <div id="status" class="column is-6">
+        <div class="has-background-light">
+            <div id="status" class="columns">
+                <div class="column">
                     <Control class="mb" />
                     <Fields />
                     <Debts />
-                    <div class="columns">
-                        <Status class="column" />
-                        <AnnualReport class="column" />
+                </div>
+                <div class="column">
+                    <div class="">
+                        <Status class="mb" />
+                        <AnnualReport class="" />
                     </div>
                 </div>
-                <div id="field" class="column is-6 section">
-                    <div id="controls">
-                        <Catalogue />
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div id="field" class="section">
+            <div id="controls">
+                <Catalogue />
             </div>
         </div>
     </div>

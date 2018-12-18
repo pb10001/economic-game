@@ -1,6 +1,6 @@
 <template>
-    <div class="section">
-        <div class="box">
+    <div class="section has-background-white scrollable">
+        <div class="">
             <p class="multiline">{{log}}</p>
         </div>
     </div>
@@ -28,7 +28,7 @@ export default class Status extends Vue{
 }
 </script>
 <style lang="scss" scoped>
-.box {
+.scrollable {
     max-height: 250px;
     overflow-y: scroll;
     .multiline {

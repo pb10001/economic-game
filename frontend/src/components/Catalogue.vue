@@ -1,19 +1,15 @@
 <template>
     <div class="flex">
         <transition-group name="vl" class="flex">
-            <div class="" v-for="item in veges" :key="item.name" v-if="item.isSeedable(currentMonth)">
+            <div class="" v-for="item in veges" :key="item.name">
                 <div class="box">
                     <div class="content">
                         <div class="media">
                             <div class="media-left">
-                                <img :src="item.url" width="64">
+                                <img :src="item.url" width="48">
                             </div>
                             <div class="media-content">
-                                <p class="title is-4">{{item.name}}</p>
-                                <div class="buttons has-addons">
-                                    <a @click="seed(item)" class="button is-primary">植える</a>
-                                    <a @click="seedAll(item)" class="button is-info">全畑に植える</a>
-                                </div>
+                                <p class="title is-6">{{item.name}}</p>
                             </div>
                         </div>
                         <table>
@@ -59,12 +55,6 @@ import Vegetable from '../vegetable';
     mounted() {
     },
     methods: {
-        seed(item: Vegetable) {
-            this.$store.commit('agriculture/seed', item.copy());
-        },
-        seedAll(item: Vegetable) {
-            this.$store.commit('agriculture/seedAll', item);
-        },
     },
 })
 export default class Catalogue extends Vue {

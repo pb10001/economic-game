@@ -6,14 +6,14 @@
                     <div class="box earth has-text-white">
                         <div class="media">
                             <div v-if="!item.vegetable.isEmpty()" class="media-left">
-                                <figure class="image is-64x64 mb">
+                                <figure class="image is-48x48 mb">
                                     <img v-if="item.vegetable.url" :src="item.vegetable.url">
                                     <progress class="progress is-success is-small" :value="item.vegetable.age" :max="item.vegetable.span"></progress>
                                 </figure>
                             </div>
                             <div class="media-content">
                                 <p v-if="!item.vegetable.isEmpty()">{{item.vegetable.name}}</p>
-                                <a class="button is-primary" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
+                                <a class="button is-primary is-small" v-if="item.vegetable.isHarvestable" @click="harvest(item)">収穫</a>
                             </div>
                         </div>
                     </div>
