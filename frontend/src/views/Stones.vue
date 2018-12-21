@@ -1,12 +1,15 @@
 <template>
-    <div class="has-background-light">
+    <div class="has-background-light h60">
         <div id="field">
             <div class="columns is-mobile">
                 <div class="column" v-for="item in stacks" :key="item.id">
                     <Stack :data="item" />
                 </div>
             </div>
-            <button class="button is-success" @click="next">次へ</button>
+            <p>ターン:{{turnNum + 1}}</p>
+            <p v-if="!isEnd">{{turnNum % 2 === 0 ? '先手' : '後手'}}の番</p>
+            <p v-if="winner >= 0">{{winner === 0 ? '先手': '後手'}}の勝ち!</p>
+            <button v-if="!isEnd" class="button is-success" @click="next">次へ</button>
         </div>
     </div>
 </template>
@@ -19,8 +22,17 @@ import Stack from '@/components/Stack.vue';
         Stack,
     },
     computed: {
+        turnNum(): number {
+            return this.$store.state.stones.turnNum;
+        },
         stacks(): any {
             return this.$store.state.stones.stacks;
+        },
+        winner(): number {
+            return this.$store.state.stones.winner;
+        },
+        isEnd(): boolean {
+            return this.$store.state.stones.isEnd;
         },
     },
     methods: {
@@ -32,3 +44,8 @@ import Stack from '@/components/Stack.vue';
 export default class Stones extends Vue {
 }
 </script>
+<style lang="scss" scoped>
+.h60 {
+    min-height: 100vh;
+}
+</style>

@@ -1,43 +1,24 @@
 <template>
-    <div class="flex">
-        <transition-group name="vl" class="flex">
-            <div class="" v-for="item in veges" :key="item.name">
-                <div class="box">
-                    <div class="content">
-                        <div class="media">
-                            <div class="media-left">
-                                <img :src="item.url" width="48">
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-6">{{item.name}}</p>
-                            </div>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>項目</th>
-                                <th>値</th>
-                            </tr>
-                            <tr>
-                                <td>種の価格</td>
-                                <td>{{item.initPrice}}P</td>
-                            </tr>
-                            <tr>
-                                <td>栽培期間</td>
-                                <td>{{item.span}}ヶ月</td>
-                            </tr>
-                            <tr>
-                                <td>販売価格</td>
-                                <td>{{item.value}}P</td>
-                            </tr>
-                            <tr>
-                                <td>リスク</td>
-                                <td>{{item.risk * 100}}%</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </transition-group>
+    <div>
+        <table class=" table is-striped">
+            <tr>
+                <th>野菜</th>
+                <th>種の価格</th>
+                <th>栽培期間</th>
+                <th>販売価格</th>
+                <th>リスク</th>
+            </tr>
+            <tr  v-for="item in veges" :key="item.name">
+                <td>
+                    <img :src="item.url" width="32px">
+                    <span>{{item.name}}</span>
+                </td>
+                <td>{{item.initPrice}}P</td>
+                <td>{{item.span}}ヶ月</td>
+                <td>{{item.value}}P</td>
+                <td>{{item.risk * 100}}%</td>
+            </tr>
+        </table>
     </div>
 </template>
 <script lang="ts">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-tag class="subtitle is-large is-white is-rounded">所持金:{{currentMoney}}P</b-tag>
+        <b-tag class="subtitle is-large is-white is-rounded has-text-primary">{{currentMoney}}P</b-tag>
         <div class="buttons has-addons">
             <span @click="harvestAll" class="button is-success is-small">すべて収穫</span>
             <span @click="addField" class="button is-success is-small">農地拡大</span>
@@ -18,11 +18,11 @@
                             </div>
                             <div class="media-content">
                                 <p class="title is-6">{{item.name}}</p>
-                                <div class="buttons has-addons">
-                                    <a @click="seed(item)" class="button is-primary is-small">植える</a>
-                                    <a @click="seedAll(item)" class="button is-info is-small">全畑に植える</a>
-                                </div>
                             </div>
+                        </div>
+                        <div class="buttons has-addons">
+                            <a @click="seed(item)" class="button is-primary is-small">植える</a>
+                            <a @click="seedAll(item)" class="button is-info is-small">全畑に植える</a>
                         </div>
                     </div>
                 </div>

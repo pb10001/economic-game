@@ -5,7 +5,7 @@
             <span @click="removeOne" class="button is-danger is-small">-</span>
         </div>
         <transition-group name="l">
-            <span v-for="item in data.stones" :key="item">
+            <span v-for="item in data.stones" :key="item" class="l-item flex">
                 <Stone :value="item"/>
             </span>
         </transition-group>
@@ -48,9 +48,6 @@ export default class Stack extends Vue {
 .l-enter, .l-leave-to {
   opacity: 0;
   transform: translateY(60px);
-}
-.l-leave-active {
-  position: absolute;
 }
 .l-move {
   transition: transform .5s;
