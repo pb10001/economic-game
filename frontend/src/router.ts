@@ -24,6 +24,11 @@ export default new Router({
       component: () => import('./views/Agriculture.vue'),
     },
     {
+      path: '/stones',
+      name: 'stones',
+      component: () => import('./views/Stones.vue'),
+    },
+    {
       path: '/proto',
       name: 'proto',
       component: () => import('./views/Proto.vue'),

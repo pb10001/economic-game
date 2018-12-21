@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="subtitle">所持金:{{currentMoney}}P</p>
+        <b-tag class="subtitle is-large is-white is-rounded">所持金:{{currentMoney}}P</b-tag>
         <div class="buttons has-addons">
             <span @click="harvestAll" class="button is-success is-small">すべて収穫</span>
             <span @click="addField" class="button is-success is-small">農地拡大</span>
