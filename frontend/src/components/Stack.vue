@@ -49,6 +49,9 @@ export default class Stack extends Vue {
   opacity: 0;
   transform: translateY(60px);
 }
+.l-leave-active {
+  position: absolute;
+}
 .l-move {
   transition: transform .5s;
 }
