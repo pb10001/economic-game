@@ -9,8 +9,8 @@
             <p>ターン:{{turnNum + 1}}</p>
             <p v-if="!isEnd">{{turnNum % 2 === 0 ? '先手' : '後手'}}の番</p>
             <p v-if="winner >= 0">{{winner === 0 ? '先手': '後手'}}の勝ち!</p>
-            <button v-if="!isEnd" class="button is-success" @click="next">次へ</button>
-            <button v-if="!isEnd" class="button is-success" @click="think">AI</button>
+            <button v-if="!isEnd" class="button is-success is-rounded" @click="next">次へ</button>
+            <button v-if="!isEnd" class="button is-warning is-rounded" @click="think">AI</button>
             <p class="multiline">{{log}}</p>
         </div>
     </div>
