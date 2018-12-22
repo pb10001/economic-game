@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Stone from '@/components/Stone.vue';
-import StackModel from '../stack';
+import StackModel from '../pile';
 
 @Component({
     components: {
@@ -22,7 +22,7 @@ import StackModel from '../stack';
     },
     computed: {
         selectedIndex() {
-            return this.$store.state.stones.selectedIndex;
+            return this.$store.state.stones.game.selectedIndex;
         },
     },
     methods: {
@@ -32,7 +32,7 @@ import StackModel from '../stack';
     },
 })
 export default class Stack extends Vue {
-    @Prop() data!: StackModel;
+    @Prop() data!: Pile;
     constructor() {
         super();
     }

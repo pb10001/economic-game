@@ -1,4 +1,4 @@
-export default class StackModel {
+export default class Pile {
     public id: number;
     public stones: number[] = [];
     constructor(id: number, num: number) {
@@ -10,7 +10,7 @@ export default class StackModel {
     public remove(num: number): void {
         if (num > this.stones.length) { return; }
         for (let i = num; i > 0; i--) {
-            this.stones = this.stones.filter((x) => x !== this.stones.length - i);
+            this.stones.pop();
         }
     }
     public isZero(): boolean {

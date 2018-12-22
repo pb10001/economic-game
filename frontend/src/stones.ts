@@ -1,51 +1,51 @@
-import StackModel from './stack';
+import Nim from './nim';
+import NimAI from './nim-ai';
 const stones = {
     namespaced: true,
     state: {
-        turnNum: 0,
-        selectedIndex: -1,
-        actionExists: false,
-        isEnd: false,
-        winner: -1,
-        stacks: [
-            new StackModel(1, Math.floor(Math.random() * 8) + 1),
-            new StackModel(2, Math.floor(Math.random() * 8) + 1),
-            new StackModel(3, Math.floor(Math.random() * 8) + 1),
-            new StackModel(4, Math.floor(Math.random() * 8) + 1),
-        ] as StackModel[],
+        game: new Nim(),
+        message: '',
+        log: '',
+        num: 0,
     },
     mutations: {
         select(state: any, id: number): void {
-            state.selectedIndex = id;
+            state.log += (state.game.turnNum % 2 === 0 ? '先手': '後手') + '人間: ' + id + ',';
+            state.game.select(id);
         },
         removeOne(state: any): void {
-            state.actionExists = true;
-            state.stacks.filter((x: StackModel) => x.id === state.selectedIndex)
-            .map((s: StackModel) => s.remove(1));
+            state.num++;
+            state.game.removeOne();
         },
         next(state: any): void {
-            if (state.isEnd) { return; }
-            if (state.actionExists) {
-                state.selectedIndex = -1;
-                state.actionExists = false;
-                if (stones.mutations.checkEnd(state)) {
-                    state.winner = state.turnNum % 2;
-                    state.isEnd = true;
-                    return;
-                }
-                /* 初期化 */
-                state.turnNum++;
+            if (state.num > 0) {
+                state.log += state.num + "個\n";
             }
+            state.num = 0;
+            state.game.next();
         },
         checkEnd(state: any): boolean {
-            const stacks: StackModel[] = state.stacks;
-            const res = stacks.reduce((current, next) => current + next.currentNum(), 0);
-            return res === 0;
+            return state.game.checkEnd();
         },
+        think(state: any): void {
+            if (state.game.selectedIndex > 0) { return; }
+            if (state.game.actionExists) { return; }
+            let game: Nim = state.game;
+            let ai = new NimAI(state.game.piles);
+            const g = ai.calcGrundy();
+            if (g !== 0) {
+                state.message = ai.think((_, index, num) => {
+                    state.log  += (state.game.turnNum % 2 === 0 ? '先手': '後手') + "AI: " + (index + 1) + "," + num + "個\n";
+                    state.game.remove(index, num);
+                    state.game.next();
+                });
+            } else {
+                state.log += (state.game.turnNum % 2 === 0 ? '先手': '後手') + "AI: 投了\n"; 
+            }
+        }
     },
     getters: {
-        turnNum(state: any) { return state.turnNum; },
-        stacks(state: any) { return state.stacks; },
+        game(state: any) { return state.game; },
     },
 };
 export default stones;
