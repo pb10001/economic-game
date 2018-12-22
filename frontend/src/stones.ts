@@ -19,7 +19,7 @@ const stones = {
         },
         next(state: any): void {
             if (state.num > 0) {
-                state.log += state.num + "個\n";
+                state.log += state.num + '個\n';
             }
             state.num = 0;
             state.game.next();
@@ -28,19 +28,20 @@ const stones = {
             return state.game.checkEnd();
         },
         think(state: any): void {
-            if (state.game.selectedIndex > 0) { return; }
-            if (state.game.actionExists) { return; }
-            let game: Nim = state.game;
-            let ai = new NimAI(state.game.piles);
+            const game: Nim = state.game;
+            if (game.selectedIndex > 0) { return; }
+            if (game.actionExists) { return; }
+            const ai = new NimAI(game.piles);
             const g = ai.calcGrundy();
             if (g !== 0) {
                 state.message = ai.think((_, index, num) => {
-                    state.log  += (state.game.turnNum % 2 === 0 ? '先手': '後手') + "AI: " + (index + 1) + "," + num + "個\n";
-                    state.game.remove(index, num);
-                    state.game.next();
+                    state.log  += (game.turnNum % 2 === 0 ? '先手' : '後手')
+                        + 'AI: ' + (index + 1) + ',' + num + '個\n';
+                    game.remove(index, num);
+                    game.next();
                 });
             } else {
-                state.log += (state.game.turnNum % 2 === 0 ? '先手': '後手') + "AI: 投了\n"; 
+                state.log += (game.turnNum % 2 === 0 ? '先手' : '後手') + 'AI: 投了\n';
             }
         }
     },

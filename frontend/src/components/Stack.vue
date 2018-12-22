@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Stone from '@/components/Stone.vue';
-import StackModel from '../pile';
+import Pile from '../pile';
 
 @Component({
     components: {
