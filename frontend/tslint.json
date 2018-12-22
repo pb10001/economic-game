@@ -16,6 +16,6 @@
     "object-literal-sort-keys": false,
     "experimentalDecorators": true,
     "no-consecutive-blank-lines": false,
-    "no-bitwise": false,
-  },
+    "no-bitwise": false
+  }
 }
