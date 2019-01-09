@@ -33,5 +33,10 @@ export default new Router({
       name: 'proto',
       component: () => import('./views/Proto.vue'),
     },
+    {
+      path: '/society',
+      name: 'society',
+      component: () => import('./views/Society.vue'),
+    },
   ],
 });

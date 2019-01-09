@@ -10,7 +10,7 @@ const stones = {
     },
     mutations: {
         select(state: any, id: number): void {
-            state.log += (state.game.turnNum % 2 === 0 ? '先手': '後手') + '人間: ' + id + ',';
+            state.log += (state.game.turnNum % 2 === 0 ? '先手' : '後手') + '人間: ' + id + ',';
             state.game.select(id);
         },
         removeOne(state: any): void {
@@ -43,7 +43,7 @@ const stones = {
             } else {
                 state.log += (game.turnNum % 2 === 0 ? '先手' : '後手') + 'AI: 投了\n';
             }
-        }
+        },
     },
     getters: {
         game(state: any) { return state.game; },

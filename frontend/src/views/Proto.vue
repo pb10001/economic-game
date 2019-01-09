@@ -18,15 +18,15 @@ const setWall = (id: number, x: number, y: number, isVertical: boolean): any => 
     }
 };
 const setPiece = (id: number, x: number, y: number, color: string): any => {
-    return {id: 1000 + id, x: x * 50 - 25, y: y * 50 - 25, color: color};
+    return {id: 1000 + id, x: x * 50 - 25, y: y * 50 - 25, color};
 };
 @Component({
     computed: {
         lines() {
-            let lines = [];
-            for (let i=0;i<10;i++) {
-                lines.push({id: i, x1: i*50, y1: 0, x2: i*50, y2: 450});
-                lines.push({id: 11+i,x1: 0, y1: i*50, x2: 450, y2: i*50});
+           const lines = [];
+            for (let  i =0 ; i <10 ;i++) {
+                lines.push({id: i, x1:  i *50, y1: 0, x2:  i *50, y2: 450});
+                lines.push({id: 11 +i ,x1: 0, y1:  i *50, x2: 450, y2:  i *50});
             }
             return lines;
         },
@@ -38,19 +38,19 @@ const setPiece = (id: number, x: number, y: number, color: string): any => {
         },
         pieces() {
             return [
-                setPiece(1, 5, 1, "white"),
-                setPiece(2, 5, 9, "black"),
+                setPiece(1, 5, 1 ,'white'),
+                setPiece(2, 5, 9 ,'black'),
             ];
-        }
+         }
     },
     methods: {
         alert(): void {
             this.$toast.open({
-                type: "is-danger",
-                message: "aaa"
+                type :'is-danger',
+                message :'aaa',
             });
         },
-    }
+     },
 })
 export default class Proto extends Vue {
 }

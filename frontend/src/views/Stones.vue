@@ -49,7 +49,7 @@ import Stack from '@/components/Stack.vue';
         },
         think(): void {
             this.$store.commit('stones/think');
-        }
+        },
     },
 })
 export default class Stones extends Vue {

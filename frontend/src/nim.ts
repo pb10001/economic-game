@@ -19,7 +19,7 @@ export default class Nim {
         if (this.isEnd) { return; }
         this.selectedIndex = id;
     }
-    public init(num: number): void{
+    public init(num: number): void {
         for (let i: number = 0; i < num; i++) {
             this.piles.push(new Pile(i + 1, Math.floor(Math.random() * 8) + 1));
         }
